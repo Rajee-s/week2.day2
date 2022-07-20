@@ -63,7 +63,7 @@ public class DeleteLead {
 				
 				//Enter captured lead Id
 				
-				 driver.findElement(By.xpath("//label[text()='Lead ID:']/following::input")).sendKeys("13448");
+				 driver.findElement(By.xpath("//label[text()='Lead ID:']/following::input")).sendKeys(firstId);
 		
 				
 				//Click find leads button
