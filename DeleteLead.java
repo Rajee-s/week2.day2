@@ -10,7 +10,7 @@ public class DeleteLead {
 
 	public static void main(String[] args) {
 		
-				// call WDM
+					// call WDM
 				WebDriverManager.chromedriver().setup();
 				
 				
@@ -18,7 +18,7 @@ public class DeleteLead {
 				ChromeDriver driver = new ChromeDriver();
 				driver.get("http://leaftaps.com/opentaps/control/login");
 				driver.manage().window().maximize();
-				
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
 				
 				//Username and password
 				driver.findElement(By.id("username")).sendKeys("demosalesmanager");
@@ -34,7 +34,7 @@ public class DeleteLead {
 				driver.findElement(By.linkText("Leads")).click();
 				
 				//click find lead
-				driver.findElement(By.xpath("//a[@href='/crmsfa/control/findLeads']")).click();
+				driver.findElement(By.linkText("Find Leads")).click();
 				
 				//Click on phone
 				driver.findElement(By.xpath("//span[text()='Phone']")).click();
@@ -45,30 +45,34 @@ public class DeleteLead {
 				//Click find leads button
 				driver.findElement(By.xpath("//button[text()='Find Leads']")).click();
 				
+				Thread.sleep(3000);
 				//Capture lead of first resulting lead
-				
-				String firstId = driver.findElement(By.xpath("//div[@class='x-grid3-cell-inner x-grid3-col-partyId']//a")).getText();
-				System.out.println("The first Id is "+ firstId);
-				
+				//String firstId = driver.findElement(By.xpath("//div[@class='x-grid3-cell-inner x-grid3-col-partyId']//a")).getText();
+				//System.out.println("The first Id is "+ firstId);
+				WebElement firstId = driver.findElement(By.xpath("//div[@class='x-grid3-cell-inner x-grid3-col-partyId']//a"));
+				String first = firstId.getText();
+				System.out.println("The first Id is "+ first);
+			
+				Thread.sleep(3000);
 				//Click first resulting lead
 				driver.findElement(By.xpath("//div[@class='x-grid3-cell-inner x-grid3-col-partyId']//a")).click();
+				
 				
 				//Click Delete
 				
 				driver.findElement(By.className("subMenuButtonDangerous")).click();
-				//driver.findElement(By.xpath("//div[@class = 'frameSectionExtra']//a[4]")).click();
 				
 				//Click find leads
-				driver.findElement(By.xpath("//a[@href='/crmsfa/control/findLeads']")).click();
+				driver.findElement(By.linkText("Find Leads")).click();
 				
 				//Enter captured lead Id
 				
-				 driver.findElement(By.xpath("//label[text()='Lead ID:']/following::input")).sendKeys("14371");
-		
+				 driver.findElement(By.xpath("//input[@name='id']")).sendKeys(first);
+				
 				
 				//Click find leads button
 				driver.findElement(By.xpath("//button[text()='Find Leads']")).click();
-				
+				Thread.sleep(300);
 				//verify message "No records to display"
 				
 				boolean records = driver.findElement(By.xpath("//div[text()='No records to display']")).isDisplayed();
