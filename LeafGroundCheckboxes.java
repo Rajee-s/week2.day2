@@ -38,13 +38,12 @@ public class LeafGroundCheckboxes {
 				
 				
 				//select all checkboxes
-				 driver.findElement(By.xpath("//label[text()='Select all below checkboxes ']/following::input[1]")).click();
-				 driver.findElement(By.xpath("//label[text()='Select all below checkboxes ']/following::input[2]")).click();
-				 driver.findElement(By.xpath("//label[text()='Select all below checkboxes ']/following::input[3]")).click();
-				 driver.findElement(By.xpath("//label[text()='Select all below checkboxes ']/following::input[4]")).click();
-				 driver.findElement(By.xpath("//label[text()='Select all below checkboxes ']/following::input[5]")).click();
-				 driver.findElement(By.xpath("//label[text()='Select all below checkboxes ']/following::input[6]")).click();						
-
+				List<WebElement> list = driver.findElements(By.xpath("//label[text()='Select all below checkboxes ']/following::input"));
+				Integer.toString(list.size());
+		 		for(WebElement e1:list) {
+						
+					e1.click();
+				 }
 				 
 	}
 
